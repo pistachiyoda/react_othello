@@ -1,0 +1,59 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+#board {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 60px;
+    width: 404px;
+    height: 404px;
+    background-color: green;
+}
+
+.block {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: solid black;
+  border-width: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.block:nth-child(-n + 8) {
+    border-width: 4px 4px 4px 0;
+    height: 54px;
+}
+
+.block:nth-child(8n + 1) {
+    border-width: 0 4px 4px 4px;
+    width: 54px;
+}
+
+.block:first-child {
+    border-width: 4px;
+    width: 54px;
+    height: 54px;
+}
+
+.disc_black {
+    position: absolute;
+    top: 2px;
+    bottom: 0;
+    left: 2px;
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    background-color: black;
+}
+
+.disc_white {
+    position: absolute;
+    top: 2px;
+    bottom: 0;
+    left: 2px;
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    background-color: white;
+}
