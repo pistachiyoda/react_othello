@@ -1,16 +1,17 @@
-import { EventEmitter } from "../EventEmitter.js";
+// import { EventEmitter } from "../EventEmitter.js";
 import { OthelloBoardModel } from "./OthelloBoardModel.js";
-export class OthelloAppModel extends EventEmitter {
+export class OthelloAppModel{
     #currentPlayer;
     #player1;
     #player2;
     #othelloBoardModel;
 
-    constructor(player1, player2) {
-        super();
-        this.#currentPlayer = this.#player1 = player1;
-        this.#player2 = player2;
-        this.#othelloBoardModel = new OthelloBoardModel();
+    // ボードはブロックを受け取って、アップはボードを受け取って
+    constructor(player1, player2, currentPlayer = null, othelloBoardModel = null) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.currentPlayer = currentPlayer ? currentPlayer : this.player1;
+        this.othelloBoardModel = othelloBoardModel ? othelloBoardModel : new OthelloBoardModel();
     }
 
     get currentPlayer() {
@@ -29,18 +30,34 @@ export class OthelloAppModel extends EventEmitter {
         return this.#player2;
     }
 
-    emitChange() {
-        this.emit("change");
+    set currentPlayer(player) {
+        this.#currentPlayer = player
     }
 
-    // "change"キーワードでemitされる関数を設定する。
-    onChange(listener) {
-        this.addEventListener("change", listener);
+    set player1(player) {
+        this.#player1 = player
     }
+
+    set player2(player) {
+        this.#player2 = player
+    }
+
+    set othelloBoardModel(othelloBoardModel) {
+        this.#othelloBoardModel = othelloBoardModel;
+    }
+
+    // emitChange() {
+    //     this.emit("change");
+    // }
+
+    // "change"キーワードでemitされる関数を設定する。
+    // onChange(listener) {
+    //     this.addEventListener("change", listener);
+    // }
 
     switchPlayer() {
         this.#currentPlayer = this.#currentPlayer === this.#player1 ? this.#player2 : this.#player1;
-        this.emitChange();
+        // this.emitChange();
     }
 
     handleClick(x, y, othelloApp) {
@@ -51,7 +68,7 @@ export class OthelloAppModel extends EventEmitter {
         if (this.#othelloBoardModel.isEnd(othelloApp))
             console.log(this.#othelloBoardModel.determineWinner(othelloApp));
         this.switchPlayer();
-        this.emitChange();
+        // this.emitChange();
     }
 
     getPlayerName(othelloApp, color) {

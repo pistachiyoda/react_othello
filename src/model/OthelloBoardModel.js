@@ -15,19 +15,26 @@ export class OthelloBoardModel {
     #blockModels = [];
     #leftEmptyBlocks = 64;
 
-    constructor() {
-        for(let i = 0; i < 8; i++) {
-            this.#blockModels[i] = [];
-            for(let j = 0; j < 8; j++) {
-                this.#blockModels[i][j] = new OthelloBlockModel(); 
+    constructor(blockModels = null, leftEmptyBlocks = null) {
+        if (!blockModels) {
+            console.log("fuga");
+            for(let i = 0; i < 8; i++) {
+                this.#blockModels[i] = [];
+                for(let j = 0; j < 8; j++) {
+                    this.#blockModels[i][j] = new OthelloBlockModel(); 
+                }
             }
+            this.#blockModels[3][3].setWhite();
+            this.#blockModels[4][4].setWhite();
+            this.#blockModels[3][4].setBlack();
+            this.#blockModels[4][3].setBlack();
+        } else {
+            console.log("hoge");
+            this.blockModels = blockModels;
         }
-        this.#blockModels[3][3].setWhite();
-        this.#blockModels[4][4].setWhite();
-        this.#blockModels[3][4].setBlack();
-        this.#blockModels[4][3].setBlack();
-
-        this.reduceEmptyBlocks(4);
+        // console.log("======block Models in borad constructro======");
+        // console.log(this.blockModels);
+        this.leftEmptyBlocks = leftEmptyBlocks ? leftEmptyBlocks : this.reduceEmptyBlocks(4);
     }
 
     get blockModels() {
@@ -36,6 +43,14 @@ export class OthelloBoardModel {
 
     get leftEmptyBlocks() {
         return this.#leftEmptyBlocks;
+    }
+
+    set blockModels(blockModels) {
+        this.#blockModels = blockModels;
+    }
+
+    set leftEmptyBlocks(leftEmptyBlocks) {
+        this.#leftEmptyBlocks = leftEmptyBlocks;
     }
 
     reduceEmptyBlocks(count) {

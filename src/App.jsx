@@ -5,15 +5,16 @@ import { PlayerModel } from "./model/PlayerModel";
 import { OthelloAppModel } from "./model/OthelloAppModel";
 
 function App() {
-  const Player1 = new PlayerModel("player1", "black");
-  const Player2 = new PlayerModel("player2", "white");
-  const othelloAppModel = new OthelloAppModel(Player1, Player2);
-
-  // const [, set] = useState([]);
+  // レンダリングされるとここからレンダリングされるので毎回新規作成されちゃう
+  // そもそも最初2回実行されているのも謎
+  console.log("piyopiyo");
+  const [othelloAppModel, setOthelloAppModel] = useState(
+    new OthelloAppModel(new PlayerModel('player1', 'black'), new PlayerModel('player2', 'white'))
+  );
 
   return (
     <div>
-      <OthelloBoard othelloAppModel={othelloAppModel}/>
+      <OthelloBoard othelloAppModel={othelloAppModel} setOthelloAppModel={setOthelloAppModel}/>
     </div>
   );
 }

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { OthelloBlock } from "./OthelloBlock"
 
 export const OthelloBoard = (props) => {
-    const { othelloAppModel } = props;
-    // 二次元配列はコンポーネントの中で展開できないので、一次元に直す
+    console.log("OthelloBoard rendered!");
+    const { othelloAppModel, setOthelloAppModel } = props;
     const othelloBlocks = othelloAppModel.othelloBoardModel.blockModels.flatMap((blocks, x) => {
         return blocks.map((block, y) => {
             return (
-                <OthelloBlock key={`${x}-${y}`} x={x} y={y} block={block}/>
+                <OthelloBlock key={`${x}-${y}`} x={x} y={y} block={block} othelloAppModel={othelloAppModel} setOthelloAppModel={setOthelloAppModel}/>
             )
         })
     })
