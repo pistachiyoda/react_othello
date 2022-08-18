@@ -3,6 +3,7 @@ import "./style.css";
 import { OthelloBoard } from "./components/OthelloBoard";
 import { PlayerModel } from "./model/PlayerModel";
 import { OthelloAppModel } from "./model/OthelloAppModel";
+import { OthelloPlayer } from "./components/OthelloPlayer";
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
 
   return (
     <div>
+      <h1>React Othello App</h1>
+      <OthelloPlayer currentPlayer={othelloAppModel.currentPlayer}/>
       <OthelloBoard othelloAppModel={othelloAppModel} setOthelloAppModel={setOthelloAppModel}/>
     </div>
   );
