@@ -1,5 +1,8 @@
 // import { EventEmitter } from "../EventEmitter.js";
-import { OthelloBoardModel } from "./OthelloBoardModel.js";
+import { PlayerModel } from "./PlayerModel";
+import { OthelloBoardModel } from "./OthelloBoardModel";
+import { OthelloBlockModel } from "./OthelloBlockModel";
+
 export class OthelloAppModel{
     #currentPlayer;
     #player1;
@@ -73,5 +76,21 @@ export class OthelloAppModel{
 
     getPlayerName(othelloApp, color) {
         return othelloApp.player1.color === color ? othelloApp.player1.name : othelloApp.player2.name; 
+    }
+
+    createUpdatedOthelloAppModel = (othelloApp) => {
+        const blockModels =  [];
+        for(let i = 0; i < 8; i++) {
+            blockModels[i] = [];
+            for(let j = 0; j < 8; j++) {
+                blockModels[i][j] = new OthelloBlockModel(othelloApp.othelloBoardModel.blockModels[i][j].status); 
+            }
+        }
+        const updatedOthelloAppModel =  new OthelloAppModel(
+                                                new PlayerModel(othelloApp.player1.name, othelloApp.player1.color),
+                                                new PlayerModel(othelloApp.player2.name, othelloApp.player2.color),
+                                                othelloApp.currentPlayer,
+                                                new OthelloBoardModel(blockModels, othelloApp.othelloBoardModel.leftEmptyBlocks))
+        return updatedOthelloAppModel;
     }
 }

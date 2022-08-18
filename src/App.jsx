@@ -17,6 +17,8 @@ function App() {
     <div>
       <h1>React Othello App</h1>
       <OthelloPlayer currentPlayer={othelloAppModel.currentPlayer}/>
+      <button onClick={() => {othelloAppModel.switchPlayer();
+                              setOthelloAppModel(othelloAppModel.createUpdatedOthelloAppModel(othelloAppModel));}}>パスする</button>
       <OthelloBoard othelloAppModel={othelloAppModel} setOthelloAppModel={setOthelloAppModel}/>
     </div>
   );
