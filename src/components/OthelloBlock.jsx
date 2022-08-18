@@ -13,10 +13,9 @@ const createUpdatedOthelloAppModel = (othelloAppModel) => {
             blockModels[i][j] = new OthelloBlockModel(othelloAppModel.othelloBoardModel.blockModels[i][j].status); 
         }
     }
-    // console.log(blockModels);
     const updatedOthelloAppModel =  new OthelloAppModel(
-                                            new PlayerModel(othelloAppModel.player1, 'black'),
-                                            new PlayerModel(othelloAppModel.player2, 'white'),
+                                            new PlayerModel(othelloAppModel.player1.name, othelloAppModel.player1.color),
+                                            new PlayerModel(othelloAppModel.player2.name, othelloAppModel.player2.color),
                                             othelloAppModel.currentPlayer,
                                             new OthelloBoardModel(blockModels, othelloAppModel.othelloBoardModel.leftEmptyBlocks))
     return updatedOthelloAppModel;
