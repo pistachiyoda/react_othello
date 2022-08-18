@@ -17,7 +17,6 @@ export class OthelloBoardModel {
 
     constructor(blockModels = null, leftEmptyBlocks = null) {
         if (!blockModels) {
-            console.log("fuga");
             for(let i = 0; i < 8; i++) {
                 this.#blockModels[i] = [];
                 for(let j = 0; j < 8; j++) {
@@ -29,11 +28,8 @@ export class OthelloBoardModel {
             this.#blockModels[3][4].setBlack();
             this.#blockModels[4][3].setBlack();
         } else {
-            console.log("hoge");
             this.blockModels = blockModels;
         }
-        // console.log("======block Models in borad constructro======");
-        // console.log(this.blockModels);
         this.leftEmptyBlocks = leftEmptyBlocks ? leftEmptyBlocks : this.reduceEmptyBlocks(4);
     }
 
