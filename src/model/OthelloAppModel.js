@@ -11,6 +11,10 @@ export class OthelloAppModel{
 
     // ボードはブロックを受け取って、アップはボードを受け取って
     constructor(player1, player2, currentPlayer = null, othelloBoardModel = null) {
+        this.initialize(player1, player2, currentPlayer, othelloBoardModel);
+    }
+
+    initialize(player1, player2, currentPlayer = null, othelloBoardModel = null) {
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = currentPlayer ? currentPlayer : this.player1;
@@ -68,8 +72,8 @@ export class OthelloAppModel{
             return;
         this.#othelloBoardModel.dispachDisc(x, y, othelloApp);
         this.#othelloBoardModel.updateDisc(x, y, othelloApp);
-        if (this.#othelloBoardModel.isEnd(othelloApp))
-            console.log(this.#othelloBoardModel.determineWinner(othelloApp));
+        if (this.#othelloBoardModel.isEnd(othelloApp) && window.confirm("もう一度プレイしますか？\n"))
+            this.initialOthelloAppModel();
         this.switchPlayer();
         // this.emitChange();
     }
@@ -92,5 +96,9 @@ export class OthelloAppModel{
                                                 othelloApp.currentPlayer,
                                                 new OthelloBoardModel(blockModels, othelloApp.othelloBoardModel.leftEmptyBlocks))
         return updatedOthelloAppModel;
+    }
+
+    initialOthelloAppModel = () => {
+        this.initialize(new PlayerModel("player1", "black"), new PlayerModel("player2", "white"));
     }
 }

@@ -50,7 +50,7 @@ export class OthelloBoardModel {
     }
 
     reduceEmptyBlocks(count) {
-        this.#leftEmptyBlocks -= count;
+        return this.#leftEmptyBlocks -= count;
     }
 
     isDispachable(x, y, othelloApp) {
@@ -155,11 +155,9 @@ export class OthelloBoardModel {
     }
 
     isEnd(othelloApp) {
+        console.log(othelloApp.othelloBoardModel.leftEmptyBlocks);
         if (othelloApp.othelloBoardModel.leftEmptyBlocks === 0)
-        {
-            console.log("終わり！");
             return true;
-        }
         return false;
     }
 
