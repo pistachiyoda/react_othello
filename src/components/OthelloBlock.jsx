@@ -12,6 +12,10 @@ export const OthelloBlock = (props) => {
         <div className="block" onClick={() => {
             othelloAppModel.handleClick(x, y, othelloAppModel);
             setOthelloAppModel(othelloAppModel.createUpdatedOthelloAppModel(othelloAppModel));
+            setTimeout(() => {
+                othelloAppModel.checkIsEnd();
+                setOthelloAppModel(othelloAppModel.createUpdatedOthelloAppModel(othelloAppModel));
+            }, 100);
         }}>
             <div className={statusClass}></div>
         </div>

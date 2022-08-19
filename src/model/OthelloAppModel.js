@@ -60,8 +60,6 @@ export class OthelloAppModel{
             return;
         this.othelloBoardModel.dispachDisc(x, y, othelloApp);
         this.othelloBoardModel.updateDisc(x, y, othelloApp);
-        if (this.othelloBoardModel.isEnd(othelloApp) && window.confirm("もう一度プレイしますか？\n"))
-            this.initialOthelloAppModel();
         this.switchPlayer();
     }
 
@@ -87,5 +85,31 @@ export class OthelloAppModel{
 
     initialOthelloAppModel = () => {
         this.initialize(new PlayerModel("player1", "black"), new PlayerModel("player2", "white"));
+    }
+
+    checkIsEnd = () => {
+        if (!this.othelloBoardModel.isEnd(this))
+            return;
+        if (!window.confirm(this.othelloBoardModel.determineWinner(this) + "が勝ちました。もう一度プレイしますか？\n")) {
+            window.close();
+        } 
+        this.initialOthelloAppModel();
+    }
+
+    goingToEnd = () => {
+        this.player1 = new PlayerModel("player1", "black");
+        this.player2 = new PlayerModel("player2", "white");
+        this.currentPlayer = this.player1;
+
+        const blockModels = [];
+        for(let i = 0; i < 8; i++) {
+            blockModels[i] = [];
+            for(let j = 0; j < 8; j++) {
+                blockModels[i][j] = new OthelloBlockModel("white"); 
+            }
+        }
+        blockModels[0][0].setBlack();
+        blockModels[7][7].setEmpty();
+        this.othelloBoardModel = new OthelloBoardModel(blockModels, 1);
     }
 }

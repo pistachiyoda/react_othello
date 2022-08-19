@@ -17,6 +17,9 @@ function App() {
       <OthelloPlayer currentPlayer={othelloAppModel.currentPlayer}/>
       <button onClick={() => {othelloAppModel.switchPlayer();
                               setOthelloAppModel(othelloAppModel.createUpdatedOthelloAppModel(othelloAppModel));}}>パスする</button>
+      {/* 終了処理テスト用 */}
+      {/* <button onClick={() => {othelloAppModel.goingToEnd();
+                              setOthelloAppModel(othelloAppModel.createUpdatedOthelloAppModel(othelloAppModel));}}>一気に終了</button> */}
       <OthelloBoard othelloAppModel={othelloAppModel} setOthelloAppModel={setOthelloAppModel}/>
     </div>
   );
