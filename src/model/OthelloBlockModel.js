@@ -18,14 +18,14 @@ export class OthelloBlockModel {
     }
 
     setBlack() {
-        this.#status = "black";
+        this.status = "black";
     }
 
     setWhite() {
-        this.#status = "white";
+        this.status = "white";
     }
 
     setEmpty() {
-        this.#status = "empty";
+        this.status = "empty";
     }
 }

@@ -7,8 +7,6 @@ import { OthelloPlayer } from "./components/OthelloPlayer";
 
 
 function App() {
-  // そもそも最初2回実行されているのも謎
-  console.log("piyopiyo");
   const [othelloAppModel, setOthelloAppModel] = useState(
     new OthelloAppModel(new PlayerModel('player1', 'black'), new PlayerModel('player2', 'white'))
   );

@@ -50,7 +50,7 @@ export class OthelloBoardModel {
     }
 
     reduceEmptyBlocks(count) {
-        return this.#leftEmptyBlocks -= count;
+        return this.leftEmptyBlocks -= count;
     }
 
     isDispachable(x, y, othelloApp) {
@@ -97,7 +97,6 @@ export class OthelloBoardModel {
     }
 
     isLocatedNextOppositeColor(x, y, othelloApp) {
-        // 周囲に一つでもoppsite色の石がある
         return vectors.some(([xDir, yDir]) => this.isOppositeColor(x + xDir, y + yDir, othelloApp));
     }
 
@@ -112,8 +111,8 @@ export class OthelloBoardModel {
     }
 
     checkIsSandwiched(x, y, othelloApp, xDir, yDir, sandwichedBlocks = []) {
-        x += xDir; //
-        y += yDir; //
+        x += xDir;
+        y += yDir;
         while(x >= 0 && y >= 0 && x < 8 && y < 8) {
             if (this.isSameColor(x, y, othelloApp))
                 return sandwichedBlocks;
@@ -155,7 +154,6 @@ export class OthelloBoardModel {
     }
 
     isEnd(othelloApp) {
-        console.log(othelloApp.othelloBoardModel.leftEmptyBlocks);
         if (othelloApp.othelloBoardModel.leftEmptyBlocks === 0)
             return true;
         return false;

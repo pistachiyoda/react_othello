@@ -1,4 +1,3 @@
-// import { EventEmitter } from "../EventEmitter.js";
 import { PlayerModel } from "./PlayerModel";
 import { OthelloBoardModel } from "./OthelloBoardModel";
 import { OthelloBlockModel } from "./OthelloBlockModel";
@@ -9,7 +8,6 @@ export class OthelloAppModel{
     #player2;
     #othelloBoardModel;
 
-    // ボードはブロックを受け取って、アップはボードを受け取って
     constructor(player1, player2, currentPlayer = null, othelloBoardModel = null) {
         this.initialize(player1, player2, currentPlayer, othelloBoardModel);
     }
@@ -53,29 +51,18 @@ export class OthelloAppModel{
         this.#othelloBoardModel = othelloBoardModel;
     }
 
-    // emitChange() {
-    //     this.emit("change");
-    // }
-
-    // "change"キーワードでemitされる関数を設定する。
-    // onChange(listener) {
-    //     this.addEventListener("change", listener);
-    // }
-
     switchPlayer() {
-        this.#currentPlayer = this.#currentPlayer.name === this.#player1.name ? this.#player2 : this.#player1;
-        // this.emitChange();
+        this.currentPlayer = this.currentPlayer.name === this.player1.name ? this.player2 : this.player1;
     }
 
     handleClick(x, y, othelloApp) {
-        if (!this.#othelloBoardModel.isDispachable(x, y, othelloApp))
+        if (!this.othelloBoardModel.isDispachable(x, y, othelloApp))
             return;
-        this.#othelloBoardModel.dispachDisc(x, y, othelloApp);
-        this.#othelloBoardModel.updateDisc(x, y, othelloApp);
-        if (this.#othelloBoardModel.isEnd(othelloApp) && window.confirm("もう一度プレイしますか？\n"))
+        this.othelloBoardModel.dispachDisc(x, y, othelloApp);
+        this.othelloBoardModel.updateDisc(x, y, othelloApp);
+        if (this.othelloBoardModel.isEnd(othelloApp) && window.confirm("もう一度プレイしますか？\n"))
             this.initialOthelloAppModel();
         this.switchPlayer();
-        // this.emitChange();
     }
 
     getPlayerName(othelloApp, color) {
